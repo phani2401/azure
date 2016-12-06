@@ -5,4 +5,5 @@
     </filter>
     <filter root="/apps/sling" />
     <filter root="/etc/designs/aemcode"/>
+    <filter root="/apps/dam"/>
 </workspaceFilter>

@@ -10,3 +10,14 @@ Rules to be followed for asset/content migration:
 4) Write scripts to read the content from source systems [execute the scripts multiple times and check if any exceptions occur or any mismatch in data is found].
 5) Copy the assets to a server where the AEM exists and asset upload process will start.
 6) Use Existing tools like ACS commons - CSV importer to import content from a csv file. 
+
+Process::
+Disable workflows.
+Load tags.
+Ingest assets.
+Process renditions.
+Activate assets.
+Enable workflows.
+
+The reference can be found here.
+https://docs.adobe.com/docs/en/aem/6-2/administer/content/assets/best-practices-for-assets/assets-migration-guide.html
