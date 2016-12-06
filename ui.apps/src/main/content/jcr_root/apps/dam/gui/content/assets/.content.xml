@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <metadataeditor/>
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="AEM Assets"
+        sling:resourceType="granite/ui/components/shell/collectionpage"
+        sling:vanityOrder="{Long}291"
+        sling:vanityPath="/assets"
+        contentPath="${requestPathInfo.suffix}"
+        currentView="${state[&quot;shell.collectionpage.layoutId&quot;].string}"
+        modeGroup="cq-damadmin-admin-childpages"
+        omnisearchLocationPath="/libs/granite/omnisearch/content/metadata/asset"
+        pageURITemplate="/assets.html{+id}"
+        targetCollection=".cq-damadmin-admin-childpages">
+        <redirector
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="dam/gui/components/admin/page/contentchecker"/>
+        <head jcr:primaryType="nt:unstructured">
+            <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/admin/asset/title"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                categories="[dam.gui.admin.coral,dam.gui.actions.coral,unorm.coral,granite.shared,cq.gui.damadmin.collectiondock.coral,dam.gui.components.admin.adhocassetshare.coral,cq.common.wcm,dam.gui.view.insight,cq.gui.damadmin.lightbox.coral,cq.siteadmin.common,cq.gui.s7dam.admin.assetviewer,dam.gui.coral.fileupload,dam.gui.coral.backhref.storehref]"/>
+            <contentpath
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="dam/gui/coral/components/commons/ui/shell/contentpath"
+                path="${requestPathInfo.suffix}"/>
+        </head>
+        <header
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <dialogs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                    <items jcr:primaryType="nt:unstructured">
+                        <cloudshare
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                            <items jcr:primaryType="nt:unstructured">
+                                <errorDialog
+                                    granite:id="mac-share-error"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Error"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="error">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Unable to share folder with Adobe Marketing Cloud"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </close>
+                                    </footer>
+                                </errorDialog>
+                                <successDialog
+                                    granite:id="mac-share-success"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Success"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="success">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Shared folder with Adobe Marketing Cloud"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            granite:class="mac-share-success"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary"/>
+                                    </footer>
+                                </successDialog>
+                                <confirmationDialog
+                                    granite:id="mac-share-confirmation"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Share"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="default">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Share this folder with Adobe Marketing Cloud"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <cancel
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Cancel">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </cancel>
+                                        <share
+                                            granite:class="mac-share-confirm"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Share"
+                                            variant="primary"/>
+                                    </footer>
+                                </confirmationDialog>
+                                <unshareConfirmationDialog
+                                    granite:id="mac-unshare-confirmation"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Unshare"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="warning">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Do you really want to unshare this folder with Adobe Marketing Cloud?"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <cancel
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Cancel">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </cancel>
+                                        <unshare
+                                            granite:class="mac-unshare-confirm"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Unshare"
+                                            variant="primary"/>
+                                    </footer>
+                                </unshareConfirmationDialog>
+                                <unshareSuccessDialog
+                                    granite:id="mac-unshare-success"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Success"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="success">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Unshared folder with Adobe Marketing Cloud"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            granite:class="mac-unshare-success"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary"/>
+                                    </footer>
+                                </unshareSuccessDialog>
+                                <unshareErrorDialog
+                                    granite:id="mac-unshare-error"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Error"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="error">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Unable to unshare folder with Adobe Marketing Cloud"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </close>
+                                    </footer>
+                                </unshareErrorDialog>
+                                <noticeParentSharedDialog
+                                    granite:id="mac-share-notice"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Notice"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="notice">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Parent folder is already shared with Marketing Cloud"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </close>
+                                    </footer>
+                                </noticeParentSharedDialog>
+                                <noticeCCSharedDialog
+                                    granite:id="mac-ccshare-notice"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Notice"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="notice">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="This folder is already shared with Creative Cloud"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </close>
+                                    </footer>
+                                </noticeCCSharedDialog>
+                            </items>
+                        </cloudshare>
+                        <mppublish
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                            <items jcr:primaryType="nt:unstructured">
+                                <errorDialog
+                                    granite:id="mp-share-error"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Error"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="error">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Publish to Brand Portal failed."/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </close>
+                                    </footer>
+                                </errorDialog>
+                                <successDialog
+                                    granite:id="mp-share-success"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Success"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="success">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Published to Brand Portal."/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            granite:class="mp-share-success"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary"/>
+                                    </footer>
+                                </successDialog>
+                                <confirmationDialog
+                                    granite:id="mp-share-confirmation"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Publish"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="default">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Publish selected item(s) to Brand Portal"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <cancel
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Cancel">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </cancel>
+                                        <share
+                                            granite:class="mp-share-confirm"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Publish"
+                                            variant="primary"/>
+                                    </footer>
+                                </confirmationDialog>
+                                <unshareConfirmationDialog
+                                    granite:id="mp-unshare-confirmation"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Unpublish"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="warning">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Unpublish selected item(s) from Brand Portal"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <cancel
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Cancel">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </cancel>
+                                        <unshare
+                                            granite:class="mp-unshare-confirm"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Unpublish"
+                                            variant="primary"/>
+                                    </footer>
+                                </unshareConfirmationDialog>
+                                <unshareSuccessDialog
+                                    granite:id="mp-unshare-success"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Success"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="success">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Unpublished from Brand Portal."/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            granite:class="mp-unshare-success"
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary"/>
+                                    </footer>
+                                </unshareSuccessDialog>
+                                <unshareErrorDialog
+                                    granite:id="mp-unshare-error"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Error"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="error">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Unpublish from Brand Portal failed."/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </close>
+                                    </footer>
+                                </unshareErrorDialog>
+                                <noticeParentSharedDialog
+                                    granite:id="mp-share-notice"
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Notice"
+                                    sling:resourceType="granite/ui/components/coral/foundation/dialog"
+                                    variant="notice">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <container
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/container">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <text
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                    text="Parent folder is already published to Brand Portal"/>
+                                            </items>
+                                        </container>
+                                    </items>
+                                    <footer jcr:primaryType="nt:unstructured">
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/coral/foundation/button"
+                                            text="Close"
+                                            variant="primary">
+                                            <parentConfig
+                                                jcr:primaryType="nt:unstructured"
+                                                close="{Boolean}true"/>
+                                        </close>
+                                    </footer>
+                                </noticeParentSharedDialog>
+                            </items>
+                        </mppublish>
+                    </items>
+                </dialogs>
+                <publish
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                    <items jcr:primaryType="nt:unstructured">
+                        <replicationconfig
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            class="hide"
+                            references-url="/libs/wcm/core/content/reference.json"
+                            rel="publishwizard-url"
+                            replication-url="/bin/replicate.json"
+                            url="/mnt/overlay/dam/gui/content/assets/publishassetwizard.html"/>
+                        <selectpublish
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            class="coral-Modal"
+                            id="selectpublish">
+                            <items jcr:primaryType="nt:unstructured">
+                                <header
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/container"
+                                    class="coral-Modal-header">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <heading
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            level="2"
+                                            text="Select To Publish"/>
+                                        <close
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/button"
+                                            class="coral-Modal-closeButton"
+                                            dismiss="modal"
+                                            text="×"/>
+                                    </items>
+                                </header>
+                                <body
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/container"
+                                    class="coral-Modal-body">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <scene7
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                                            id="scene7cb"
+                                            text="Publish to Scene7"
+                                            value="{Boolean}true"/>
+                                        <activate
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                                            id="publishcb"
+                                            text="Activate"
+                                            value="{Boolean}true"/>
+                                    </items>
+                                </body>
+                                <footer
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/container"
+                                    class="coral-Modal-footer">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <submit
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/button"
+                                            class="coral-Button coral-Button--primary"
+                                            dismiss="modal"
+                                            id="publish-asset"
+                                            text="Publish"/>
+                                    </items>
+                                </footer>
+                            </items>
+                        </selectpublish>
+                        <includeclientlibs
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                            categories="[dam.gui.admin.publishasset.coral]"/>
+                        <modals
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/contsys">
+                            <items jcr:primaryType="nt:unstructured">
+                                <activationsuccess
+                                    jcr:description="Selected item(s) queued up for activation."
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Success"
+                                    sling:resourceType="dam/gui/components/admin/modal"
+                                    class="coral-Modal--success"
+                                    dismiss-button-class="coral-Button coral-Button--primary"
+                                    dismiss-button-text="Close"
+                                    id="activation-success"/>
+                                <activationfailure
+                                    jcr:description="Failed to publish the selected item(s)."
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Activation Failed"
+                                    sling:resourceType="dam/gui/components/admin/modal"
+                                    class="coral-Modal--warning"
+                                    dismiss-button-class="coral-Button coral-Button--primary"
+                                    dismiss-button-text="Close"
+                                    id="activation-error"/>
+                                <activationinfo
+                                    jcr:description="No unpublished or outdated item(s) selected."
+                                    jcr:primaryType="nt:unstructured"
+                                    jcr:title="Activation Not Required"
+                                    sling:resourceType="dam/gui/components/admin/modal"
+                                    class="coral-Modal--info"
+                                    dismiss-button-class="coral-Button coral-Button--primary"
+                                    dismiss-button-text="Close"
+                                    id="activation-info"/>
+                            </items>
+                        </modals>
+                    </items>
+                </publish>
+                <unpublish
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/admin/unpublish"
+                    id="unpublish"
+                    rel="cq-damadmin-admin-actions-unpublish"/>
+                <createlightbox
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/admin/collections/createlightbox"/>
+                <dmvideopreview
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/components/s7dam/assetviewer"/>
+            </items>
+        </header>
+        <views jcr:primaryType="nt:unstructured">
+            <card
+                granite:rel="cq-damadmin-admin-childpages"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Card View"
+                sling:resourceType="granite/ui/components/coral/foundation/masonry"
+                icon="viewCard"
+                layoutId="card"
+                limit="{Long}20"
+                metaResourceType="dam/gui/coral/components/admin/contentrenderer/metaResource"
+                modeGroup="cq-damadmin-admin-childpages"
+                path="${requestPathInfo.suffix}"
+                selectionMode="${state[&quot;shell.collectionpage.selectionMode&quot;].boolean}"
+                size="${empty requestPathInfo.selectors[1] ? &quot;20&quot; : requestPathInfo.selectors[1]}"
+                src="/mnt/overlay/dam/gui/content/assets/jcr:content/views/card{.offset,limit}.html{+id}"
+                stateId="shell.collectionpage">
+                <datasource
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource"
+                    inverseOrder="{Boolean}true"
+                    limit="${empty requestPathInfo.selectors[1] ? &quot;21&quot; : requestPathInfo.selectors[1] + 1}"
+                    offset="${requestPathInfo.selectors[0]}">
+                    <asset
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/card/asset">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/renderconditions/and">
+                            <asset
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/asset"/>
+                            <not
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/renderconditions/not">
+                                <contentfragment
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                            </not>
+                        </granite:rendercondition>
+                    </asset>
+                    <directory
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/card/directory">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/directory"/>
+                    </directory>
+                    <contentfragment
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/cfm/admin/components/contentrenderer/cards/contentfragment">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                    </contentfragment>
+                </datasource>
+                <emptyitem
+                    granite:class="cq-damadmin-assets-empty-content"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/commons/ui/shell/emptycontent"
+                    style="text-align: center; margin-top: 20%;"
+                    text="There is no content to display.&lt;br>Use Create option to add content."/>
+            </card>
+            <column
+                granite:rel="cq-damadmin-admin-childpages"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Column View"
+                sling:resourceType="granite/ui/components/coral/foundation/columnview"
+                icon="viewColumn"
+                layoutId="column"
+                limit="{Long}40"
+                loadAncestors="{Boolean}true"
+                metaResourceType="dam/gui/coral/components/admin/contentrenderer/metaResource"
+                modeGroup="cq-damadmin-admin-childpages"
+                path="${requestPathInfo.suffix}"
+                previewSrc="/mnt/overlay/dam/gui/content/assets/jcr:content/views/column/columnpreview.html{+id}"
+                rootPath="/content/dam"
+                size="${empty requestPathInfo.selectors[1] ? &quot;40&quot; : requestPathInfo.selectors[1]}"
+                src="/mnt/overlay/dam/gui/content/assets/jcr:content/views/column{.offset,limit}.html{+id}"
+                stateId="shell.collectionpage">
+                <datasource
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource"
+                    inverseOrder="{Boolean}true"
+                    limit="${empty requestPathInfo.selectors[1] ? &quot;41&quot; : requestPathInfo.selectors[1] + 1}"
+                    offset="${requestPathInfo.selectors[0]}"
+                    path="${requestPathInfo.suffix}">
+                    <asset
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/column/asset">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/renderconditions/and">
+                            <asset
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/asset"/>
+                            <not
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/renderconditions/not">
+                                <contentfragment
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                            </not>
+                        </granite:rendercondition>
+                    </asset>
+                    <directory
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/column/directory">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/directory"/>
+                    </directory>
+                    <contentfragment
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/cfm/admin/components/contentrenderer/columns/contentfragment">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                    </contentfragment>
+                </datasource>
+                <columnpreview
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/admin/contentrenderer/column/columnpreview"
+                    path="${requestPathInfo.suffix}"/>
+            </column>
+            <list
+                granite:rel="cq-damadmin-admin-childpages"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="List View"
+                sling:resourceType="granite/ui/components/coral/foundation/table"
+                icon="viewList"
+                layoutId="list"
+                limit="{Long}40"
+                metaResourceType="dam/gui/coral/components/admin/contentrenderer/metaResource"
+                modeGroup="cq-damadmin-admin-childpages"
+                path="${requestPathInfo.suffix}"
+                rowReorderAction="/bin/wcmcommand?cmd=movePage&amp;srcPath={item}&amp;destPath={item}&amp;before={before}&amp;_charset_=utf-8&amp;"
+                selectionMode="row"
+                size="${empty requestPathInfo.selectors[1] ? &quot;40&quot; : requestPathInfo.selectors[1]}"
+                sortMode="remote"
+                src="/mnt/overlay/dam/gui/content/assets/jcr:content/views/list{.offset,limit}.html{+id}{?sortName,sortDir}"
+                stateId="shell.collectionpage">
+                <granite:data
+                    jcr:primaryType="nt:unstructured"
+                    columns-state-id="aem.assets.listview.columns"
+                    configure-columns-dialog-uri-template="/mnt/overlay/dam/gui/content/commons/configurecolumnsdialog.html{+id}"/>
+                <columnsdatasource
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/gui/components/siteadmin/admin/listview/coral/columns/datasources/columnsdatasource"
+                    availableColumns="/mnt/overlay/dam/gui/content/commons/availablecolumns"
+                    stateId="aem.assets.listview.columns"/>
+                <datasource
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource"
+                    inverseOrder="{Boolean}true"
+                    limit="${empty requestPathInfo.selectors[1] ? &quot;41&quot; : requestPathInfo.selectors[1] + 1}"
+                    offset="${requestPathInfo.selectors[0]}">
+                    <asset
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/row/asset">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/renderconditions/and">
+                            <asset
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/asset"/>
+                            <not
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/renderconditions/not">
+                                <contentfragment
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                            </not>
+                        </granite:rendercondition>
+                    </asset>
+                    <directory
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/row/directory">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/directory"/>
+                    </directory>
+                    <contentfragment
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/cfm/admin/components/contentrenderer/rows/contentfragment">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                    </contentfragment>
+                </datasource>
+                <emptyrow
+                    granite:class="cq-damadmin-assets-empty-content"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/commons/ui/shell/emptycontent"
+                    style="text-align: center; margin-top: 20%;"
+                    text="There is no content to display.&lt;br>Use Create option to add content."/>
+            </list>
+            <insight
+                granite:rel="cq-damadmin-admin-childpages"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Insights View"
+                sling:resourceType="granite/ui/components/coral/foundation/masonry"
+                icon="revenue"
+                layoutId="insight"
+                limit="{Long}20"
+                metaResourceType="dam/gui/coral/components/admin/contentrenderer/metaResource"
+                modeGroup="cq-damadmin-admin-childpages"
+                path="${requestPathInfo.suffix}"
+                selectionMode="${state[&quot;shell.collectionpage.selectionMode&quot;].boolean}"
+                size="${empty requestPathInfo.selectors[1] ? &quot;20&quot; : requestPathInfo.selectors[1]}"
+                src="/mnt/overlay/dam/gui/content/assets/jcr:content/views/insight{.offset,limit}.html{+id}"
+                stateId="shell.collectionpage">
+                <datasource
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource"
+                    inverseOrder="{Boolean}true"
+                    limit="${empty requestPathInfo.selectors[1] ? &quot;21&quot; : requestPathInfo.selectors[1] + 1}"
+                    offset="${requestPathInfo.selectors[0]}"
+                    showInsight="{Boolean}true">
+                    <asset
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/card/asset">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/renderconditions/and">
+                            <asset
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/asset"/>
+                            <not
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/renderconditions/not">
+                                <contentfragment
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                            </not>
+                        </granite:rendercondition>
+                    </asset>
+                    <directory
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/gui/coral/components/admin/contentrenderer/card/directory">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/assetsdatasource/renderconditions/directory"/>
+                    </directory>
+                    <contentfragment
+                        jcr:primaryType="nt:unstructured"
+                        itemResourceType="dam/cfm/admin/components/contentrenderer/cards/contentfragment">
+                        <granite:rendercondition
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/admin/components/renderconditions/contentfragment"/>
+                    </contentfragment>
+                </datasource>
+            </insight>
+        </views>
+        <breadcrumbs
+            dam:basePath="/content/dam"
+            dam:baseUrl="/assets.html"
+            dam:tenantBaseKey="dam:assetsRoot"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="dam/gui/coral/components/commons/ui/shell/datasources/breadcrumbdatasource"/>
+        <actions jcr:primaryType="nt:unstructured">
+            <selection jcr:primaryType="nt:unstructured">
+                <process_x0020_asset
+                    granite:rel="foundation-damadmin-properties-activator"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    action="foundation.link"
+                    activeSelectionCount="single"
+                    icon="organize"
+                    text="Process Asset"
+                    variant="actionBar">
+                    <data
+                        jcr:primaryType="nt:unstructured"
+                        href.uritemplate="/apps/aemcode/process-wizard/wizard.html${granite:encodeURIPath(requestPathInfo.suffix)}{?item*}"/>
+                </process_x0020_asset>
+            </selection>
+        </actions>
+        <rails jcr:primaryType="nt:unstructured">
+            <navigation
+                granite:class="cq-rail-navigation"
+                granite:id="aem-assets-rail-navigation"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Navigation"
+                sling:resourceType="granite/ui/components/coral/foundation/panel/railpanel"
+                active="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <navigationpanel
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/commons/navigationpanel"
+                        id="cq-damadmin-navigation-panel"
+                        links-path="dam/gui/content/nav/navigationlinks"
+                        orientation="vertical"
+                        size="L"/>
+                    <clientlibs
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                        categories="[cq.damadmin.navigation]"/>
+                </items>
+            </navigation>
+            <timeline
+                granite:class="cq-rail-timeline"
+                granite:id="aem-assets-rail-timeline"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Timeline"
+                sling:resourceType="granite/ui/components/coral/foundation/panel/railpanel">
+                <items jcr:primaryType="nt:unstructured">
+                    <timeline
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/include"
+                        id="aem-assets-rail-timeline"
+                        path="/mnt/overlay/dam/gui/coral/content/commons/sidepanels/timeline"/>
+                </items>
+                <granite:data
+                    jcr:primaryType="nt:unstructured"
+                    multipleWorkflowLimit="{Long}15"/>
+            </timeline>
+            <references
+                granite:class="cq-rail-references"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="References"
+                sling:resourceType="granite/ui/components/coral/foundation/panel/railpanel">
+                <items jcr:primaryType="nt:unstructured">
+                    <references
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="References"
+                        sling:resourceType="granite/ui/references/components/coral/references"
+                        adminUrl="/assets.html"
+                        text="References">
+                        <items jcr:primaryType="nt:unstructured">
+                            <list
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/contsys"
+                                class="list">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <expiredsubassets
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/references/components/coral/group"
+                                        class="expirystatus"
+                                        title="Expired">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <subassetsReferences
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/references/components/coral/type"
+                                                itemResourceType="dam/gui/coral/components/admin/references/subassetsReferences"
+                                                title="Subassets"/>
+                                        </items>
+                                    </expiredsubassets>
+                                    <siteReferences
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/references/components/coral/group"
+                                        class="site-references"
+                                        title="Site References">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <siteReferences
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/references/components/coral/type"
+                                                itemResourceType="dam/gui/coral/components/admin/references/siteReferences"
+                                                title="Site References"
+                                                type="siteReference"/>
+                                        </items>
+                                    </siteReferences>
+                                    <assetReferences
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/references/components/coral/group"
+                                        class="asset-references"
+                                        title="Asset References">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <complexReferences
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/references/components/coral/type"
+                                                itemResourceType="dam/gui/coral/components/admin/references/complexReferences"
+                                                title="Asset References"
+                                                type="complexAssetReference"/>
+                                        </items>
+                                    </assetReferences>
+                                    <copies
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/references/components/coral/group"
+                                        class="asset-copies"
+                                        title="Copies">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <assetLanguageCopies
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/references/components/coral/type"
+                                                clientLibs="[cq.gui.damadmin.references.assetlanguagecopy.coral]"
+                                                itemResourceType="dam/gui/coral/components/admin/references/assetlanguagecopy"
+                                                multiSelect="true"
+                                                title="Language Copies"
+                                                translationWorkflowModel="/etc/workflow/models/dam/dam-create-language-copy/jcr:content/model"
+                                                type="assetLanguageCopy">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <start
+                                                        granite:class="detail-toolbar start active"
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                        <granite:data
+                                                            jcr:primaryType="nt:unstructured"
+                                                            workflowModel="/etc/workflow/models/dam/dam-create-and-translate-language-copy/jcr:content/model"/>
+                                                        <items jcr:primaryType="nt:unstructured">
+                                                            <trigger
+                                                                jcr:primaryType="nt:unstructured"
+                                                                jcr:title="Create &amp; Translate"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/accordion"
+                                                                variant="large">
+                                                                <items jcr:primaryType="nt:unstructured">
+                                                                    <form
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        jcr:title="Create &amp; Translate"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form"
+                                                                        style="vertical">
+                                                                        <items jcr:primaryType="nt:unstructured">
+                                                                            <projectType
+                                                                                granite:class="projectType"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a project"
+                                                                                fieldLabel="Project"
+                                                                                name="projectType">
+                                                                                <items jcr:primaryType="nt:unstructured">
+                                                                                    <create_structure
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/option"
+                                                                                        text="Create structure only"
+                                                                                        value="add_structure_only"/>
+                                                                                    <new
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/option"
+                                                                                        text="Create a new translation project"
+                                                                                        value="add_new"/>
+                                                                                    <existing
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/option"
+                                                                                        text="Add to existing translation project"
+                                                                                        value="add_existing"/>
+                                                                                </items>
+                                                                            </projectType>
+                                                                            <configurations
+                                                                                granite:class="configurations"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a configuration"
+                                                                                fieldLabel="Translation Config"
+                                                                                name="configuration">
+                                                                                <datasource
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="dam/gui/components/admin/datasources/assetlanguagecopy/configurations"/>
+                                                                            </configurations>
+                                                                            <credentialconfiguration
+                                                                                granite:class="credentialconfig"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a configuration"
+                                                                                fieldLabel="Credential Config"
+                                                                                name="credentialconfiguration"/>
+                                                                            <translatelanguages
+                                                                                granite:id="translatelanguages"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                cq-msm-lockable="cq:tags"
+                                                                                fieldLabel="Target Languages"
+                                                                                metaType="tags"
+                                                                                mode="contains"
+                                                                                multiple="{Boolean}true"
+                                                                                name="languageCopies">
+                                                                                <datasource
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="dam/gui/components/admin/datasources/assetlanguagecopy/translatelanguages"/>
+                                                                                <values
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/autocomplete/tags"
+                                                                                    multiline="{Boolean}true"/>
+                                                                                <options
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/autocomplete/list"/>
+                                                                            </translatelanguages>
+                                                                            <projectTitle
+                                                                                granite:class="projectTitle"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/foundation/container">
+                                                                                <items jcr:primaryType="nt:unstructured">
+                                                                                    <title
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                                        fieldLabel="Project Title"
+                                                                                        name="projectTitle"/>
+                                                                                    <tooltip
+                                                                                        granite:class="fieldDescription"
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                                                        text="Multiple translation projects will be created"/>
+                                                                                </items>
+                                                                            </projectTitle>
+                                                                            <project
+                                                                                granite:class="translationProjects"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a project"
+                                                                                fieldLabel="Existing translation project"
+                                                                                name="project">
+                                                                                <datasource
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="wcm/core/components/coral/references/languagecopy/datasources/projectfolderselectdatasource"
+                                                                                    folderResourceType="cq/gui/components/projects/admin/card/foldercard"
+                                                                                    projectTemplates="[/libs/cq/core/content/projects/templates/create-translation-project]"/>
+                                                                            </project>
+                                                                            <create
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/button"
+                                                                                block="{Boolean}true"
+                                                                                disabled="{Boolean}true"
+                                                                                text="Create"
+                                                                                variant="primary">
+                                                                                <granite:data
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    oppositeText="Add"
+                                                                                    role="submit"/>
+                                                                            </create>
+                                                                        </items>
+                                                                    </form>
+                                                                </items>
+                                                            </trigger>
+                                                        </items>
+                                                    </start>
+                                                    <update
+                                                        granite:class="detail-toolbar hidden update"
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                                        <granite:data
+                                                            jcr:primaryType="nt:unstructured"
+                                                            workflowModel="/etc/workflow/models/dam/dam-update-language-copy/jcr:content/model"/>
+                                                        <items jcr:primaryType="nt:unstructured">
+                                                            <trigger
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/accordion"
+                                                                variant="large">
+                                                                <items jcr:primaryType="nt:unstructured">
+                                                                    <form
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        jcr:title="Update language copies"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form"
+                                                                        style="vertical">
+                                                                        <items jcr:primaryType="nt:unstructured">
+                                                                            <projectType
+                                                                                granite:class="projectType"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a project"
+                                                                                fieldLabel="Project"
+                                                                                name="projectType">
+                                                                                <items jcr:primaryType="nt:unstructured">
+                                                                                    <new
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/foundation/form/option"
+                                                                                        text="Create a new translation project"
+                                                                                        value="add_new"/>
+                                                                                    <existing
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/option"
+                                                                                        text="Add to existing translation project"
+                                                                                        value="add_existing"/>
+                                                                                </items>
+                                                                            </projectType>
+                                                                            <configurations
+                                                                                granite:class="configurations"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a configuration"
+                                                                                fieldLabel="Translation Config"
+                                                                                name="configuration">
+                                                                                <datasource
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="dam/gui/components/admin/datasources/assetlanguagecopy/configurations"/>
+                                                                            </configurations>
+                                                                            <credentialconfiguration
+                                                                                granite:class="credentialconfig"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a configuration"
+                                                                                fieldLabel="Credential Config"
+                                                                                name="credentialconfiguration"/>
+                                                                            <projectTitle
+                                                                                granite:class="projectTitle"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/foundation/container">
+                                                                                <items jcr:primaryType="nt:unstructured">
+                                                                                    <title
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                                        fieldLabel="Project Title"
+                                                                                        name="projectTitle"/>
+                                                                                    <tooltip
+                                                                                        granite:class="fieldDescription"
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/coral/foundation/text"
+                                                                                        text="Multiple translation projects will be created"/>
+                                                                                </items>
+                                                                            </projectTitle>
+                                                                            <project
+                                                                                granite:class="translationProjects"
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                                                                emptyText="Select a project"
+                                                                                fieldLabel="Existing translation project"
+                                                                                name="project">
+                                                                                <datasource
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="wcm/core/components/coral/references/languagecopy/datasources/projectfolderselectdatasource"
+                                                                                    folderResourceType="cq/gui/components/projects/admin/card/foldercard"
+                                                                                    projectTemplates="[/libs/cq/core/content/projects/templates/create-translation-project]"/>
+                                                                            </project>
+                                                                            <start
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/button"
+                                                                                block="{Boolean}true"
+                                                                                disabled="{Boolean}true"
+                                                                                text="Start"
+                                                                                variant="primary">
+                                                                                <granite:data
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    role="submit"/>
+                                                                            </start>
+                                                                        </items>
+                                                                    </form>
+                                                                </items>
+                                                            </trigger>
+                                                        </items>
+                                                    </update>
+                                                </items>
+                                            </assetLanguageCopies>
+                                        </items>
+                                    </copies>
+                                    <cloudconfig
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="dam/gui/coral/components/admin/references/assetlanguagecopy/cloudconfig"/>
+                                </items>
+                            </list>
+                        </items>
+                    </references>
+                </items>
+            </references>
+            <omnisearchfilter
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Filter"
+                sling:resourceType="granite/ui/components/coral/foundation/panel/railpanel"/>
+        </rails>
+        <mimeTypeLookup jcr:primaryType="nt:unstructured">
+            <Archive
+                jcr:description="ARCHIVE"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Archive"
+                mimetypes="TGZ,RAR,TAR,ZIP,APP,JAR,WAR,EAR,APK,RPM,DBM;"/>
+            <Image
+                jcr:description="IMAGE"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Image"
+                mimetypes="PNG,GIF,TIFF,JPEG,BMP,PNM,PGM,PBM,PPM,PSD,JPG,DXF,DNG,TIF,PJPEG,PTIFF,MAX,JP2,NRW,CR2,NEF,ARI,CRW,DCS,DRF,3FR,ARW,BAY,CAP,DCR,EIP,ERF,FFF,IIQ,K25,KDC,MDC,MEF,MOS,MRW,OBM,ORF,PEF,PTX,PXM,R3D,RAF,RWZ,SR2,SRF,SRW,X3F;"/>
+            <Document
+                jcr:description="DOCUMENT"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Document"
+                mimetypes="DOC,DOCX,ODT,PDF,HTML,RTF,TXT,XLS,XLSX,ODS,PPT,PPTX,ODP,INDD,PS,QXP,KEY,HTM,AI,EPUB,EPS,CSV;"/>
+            <Executable
+                jcr:description="EXECUTABLE"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Executable"
+                mimetypes="ZIP,EXE,AIR;"/>
+            <Multimedia
+                jcr:description="MULTIMEDIA"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Multimedia"
+                mimetypes="AAC,MIDI,3GP,MP3,M4A,MPG,OGA,OGG,RA,WAV,WMA,DVI,FLV,M4V,MPEG,OGV,MOV,WMV,SWF,FLA,AIF,MXF,MP4;"/>
+        </mimeTypeLookup>
+    </jcr:content>
+</jcr:root>
