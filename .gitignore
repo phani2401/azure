@@ -1,0 +1,22 @@
+#Build
+*/target/**
+target/
+.classpath
+.lazybones
+
+#IDE specific
+.metadata
+.project
+.classpath
+.settings/
+*.brackets.json
+.idea/
+*.iml
+
+#Ignore VLT Files
+.vlt
+.vlt-sync.log
+.vlt-sync-config.properties
+
+#MAC
+.DS_Store

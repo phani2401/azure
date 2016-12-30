@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Social Ticker"
+    xtype="dialog">
+    <items
+        jcr:primaryType="cq:Widget"
+        xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <tab1
+                jcr:primaryType="cq:Panel"
+                title="Social Ticker Configurations">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <tittle
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Social Ticker Title"
+                        name="./title"
+                        xtype="textfield"/>
+                    <feedcount
+                        jcr:primaryType="cq:Widget"
+                        defaultValue="4"
+                        fieldLabel="Number of Feeds "
+                        name="./feedcount"
+                        value="4"
+                        xtype="numberfield"/>
+                    <facebook
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Facebook"
+                        name="./isfacebook"
+                        type="checkbox"
+                        xtype="selection">
+                        <listeners
+                            jcr:primaryType="cq:Widget"
+                            loadcontent="function(field) {&#xa;&#x9;var tab = field.findParentByType('panel'); //find the dialog&#xa;&#x9;var container=tab.findByType('fieldset')[0];&#xa;    /*hide or show component based on checked value */&#xa;&#x9;if(field.getValue() == 'true')&#xa;&#x9;{&#xa;&#x9;container.setVisible(true)&#xa;&#x9;}&#xa;&#x9;else{&#x9;&#x9;&#xa;&#x9;container.setVisible(false);&#xa;&#x9;}&#xa;}"
+                            selectionchanged="function(comp, val, isChecked) {&#xa;    var tab = comp.findParentByType('panel'); //find the tab&#xa;&#x9;var container=tab.findByType('fieldset')[0];&#xa;    /*hide or show component based on checked value */&#xa;    isChecked ? container.setVisible(true): container.setVisible(false);&#xa;}"/>
+                    </facebook>
+                    <fbcontainer
+                        jcr:primaryType="cq:Widget"
+                        title="Facebook details"
+                        xtype="fieldset">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <facebookaccountname
+                                jcr:primaryType="cq:Widget"
+                                fieldDescription="eg; &quot;Adobe&quot; is the page id for &quot;https://www.facebook.com/Adobe/?fref=ts&quot;"
+                                fieldLabel="Facebook Page Id"
+                                name="./fbaccpath"
+                                xtype="pathfield"/>
+                            <facebookicon
+                                jcr:primaryType="cq:Widget"
+                                fieldDescription="Optional : Default image will be displayed if this field is not configured"
+                                fieldLabel="Facebook Icon Image"
+                                name="./fbicon"
+                                xtype="pathfield"/>
+                        </items>
+                    </fbcontainer>
+                    <twitter
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Twitter"
+                        name="./istwitter"
+                        type="checkbox"
+                        xtype="selection">
+                        <listeners
+                            jcr:primaryType="cq:Widget"
+                            loadcontent="function(field) {&#xa;&#x9;var tab = field.findParentByType('panel'); //find the dialog&#xa;&#x9;var container=tab.findByType('fieldset')[1];&#xa;    /*hide or show component based on checked value */&#xa;&#x9;if(field.getValue() == 'true')&#xa;&#x9;{&#xa;&#x9;container.setVisible(true)&#xa;&#x9;}&#xa;&#x9;else{&#x9;&#x9;&#xa;&#x9;container.setVisible(false);&#xa;&#x9;}&#xa;}"
+                            selectionchanged="function(comp, val, isChecked) {&#xa;    var tab = comp.findParentByType('panel'); //find the dialog&#xa;&#x9;var twittcontainer=tab.findByType('fieldset')[1];&#xa;    /*hide or show component based on checked value */&#xa;    isChecked ? twittcontainer.setVisible(true): twittcontainer.setVisible(false);&#xa;}"/>
+                    </twitter>
+                    <twittercontainer
+                        jcr:primaryType="cq:Widget"
+                        title="Twitter details"
+                        xtype="fieldset">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <twitterscreenname
+                                jcr:primaryType="cq:Widget"
+                                fieldDescription="eg; &quot;Adobe&quot; is the screen name for &quot;https://twitter.com/Adobe&quot;"
+                                fieldLabel="Twitter Screen Name"
+                                name="./twittscreenname"
+                                xtype="textfield"/>
+                            <twittericon
+                                jcr:primaryType="cq:Widget"
+                                fieldDescription="Optional : Default image will be displayed if this field is not configured"
+                                fieldLabel="Twitter Icon Image"
+                                name="./twittericon"
+                                xtype="pathfield"/>
+                        </items>
+                    </twittercontainer>
+                    <rssfeed
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="RSS Feeds"
+                        name="./isrss"
+                        type="checkbox"
+                        xtype="selection">
+                        <listeners
+                            jcr:primaryType="cq:Widget"
+                            loadcontent="function(field) {&#xa;&#x9;var tab = field.findParentByType('panel'); //find the dialog&#xa;&#x9;var container=tab.findByType('fieldset')[2];&#xa;    /*hide or show component based on checked value */&#xa;&#x9;if(field.getValue() == 'true')&#xa;&#x9;{&#xa;&#x9;container.setVisible(true)&#xa;&#x9;}&#xa;&#x9;else{&#x9;&#x9;&#xa;&#x9;container.setVisible(false);&#xa;&#x9;}&#xa;}"
+                            selectionchanged="function(field) {&#xa;&#x9;var tab = field.findParentByType('panel'); //find the dialog&#xa;&#x9;var container=tab.findByType('fieldset')[2];&#xa;    /*hide or show component based on checked value */&#xa;&#x9;if(field.getValue() == 'true')&#xa;&#x9;{&#xa;&#x9;container.setVisible(true)&#xa;&#x9;}&#xa;&#x9;else{&#x9;&#x9;&#xa;&#x9;container.setVisible(false);&#xa;&#x9;}&#xa;}"/>
+                    </rssfeed>
+                    <rsscontainer
+                        jcr:primaryType="cq:Widget"
+                        title="RSS feeds details"
+                        xtype="fieldset">
+                        <items jcr:primaryType="cq:WidgetCollection">
+                            <feedurl
+                                jcr:primaryType="cq:Widget"
+                                fieldLabel="RSS feed URL"
+                                name="./feedurl"
+                                xtype="pathfield"/>
+                            <rssicon
+                                jcr:primaryType="cq:Widget"
+                                fieldLabel="RSS Feeds Icon Image"
+                                name="./rssicon"
+                                xtype="pathfield"/>
+                        </items>
+                    </rsscontainer>
+                </items>
+            </tab1>
+        </items>
+    </items>
+</jcr:root>

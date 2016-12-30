@@ -1,0 +1,51 @@
+
+   <div data-sly-use.socialTickerUse="com.adobe.gdc.ccr.components.use.SocialTickerUse" data-sly-unwrap>
+      <div class="clearfix container">
+         <div class="row">
+            <div class="col-md-12">
+               <h3 class="sub-title">${socialTickerUse.socTicker.title}</h3>
+               <ul class="ticker-list" id="social-ticker-dynamic-panel">
+               </ul>
+            </div>
+         </div>
+      </div>
+
+	<!--/* The following script will act as a placeholder for the social ticker response json data.  */-->
+      <script id="social-ticker-template" type="text/x-handlebars-template">
+         {{#each .}}
+           <li>
+               <a href="{{url}}">
+                   <div>
+                       <div class="ticker-media">
+                           <img src="{{channelIcon}}" class="ticker-media-img"/> 
+                       </div>
+                       <div class="ticker-body">
+                           <h4 class="ticker-title">{{title}}</h4>
+                           <p class="ticker-description">{{description}}</p>
+                           <p class="ticker-info">
+                               <span class="date">{{date}}</span>
+                               <span class="seperator">.</span>
+                               <span class="from">{{channelName}}</span>
+                           </p>
+                       </div>
+                   </div>
+               </a>
+           </li>
+         {{/each}}
+      </script>
+      
+      <!--/* The following script invoke the handler template with the json data.*/ -->
+      <script>
+         var fbFeeds = ${socialTickerUse.feeds @ context='unsafe'};
+
+           $(document).ready(function(){
+              var raw_template = $('#social-ticker-template').html();
+              var template = Handlebars.compile(raw_template);
+              if(fbFeeds.list && fbFeeds.list != ""){
+                           $("#social-ticker-dynamic-panel").html(template(fbFeeds.list));
+              } else {
+				$("#social-ticker-dynamic-panel").html("Please configure the component to display content.");
+              }
+         });
+      </script>
+   </div>

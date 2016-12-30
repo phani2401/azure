@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="sling:OsgiConfig"
+    property.facebook_icon_path="/etc/designs/ccr/ccr-main/images/socialticker/facebook-icon.png"
+    property.fb_app_id=""
+    property.fb_app_secret=""
+    property.rss_image_url="/etc/designs/ccr/ccr-main/images/socialticker/feed-icon.png"
+    property.twitter_app_id=""
+    property.twitter_app_secret=""
+    property.twitter_icon_path="/etc/designs/ccr/ccr-main/images/socialticker/twitter-icon.png"/>
