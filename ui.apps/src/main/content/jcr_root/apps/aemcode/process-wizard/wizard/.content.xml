@@ -23,7 +23,7 @@
             sling:resourceType="granite/ui/components/coral/foundation/page/body">
             <items
                 jcr:primaryType="nt:unstructured"
-                sling:resourceType="com/kyocera/kdag/web/dam/processwizard">
+                sling:resourceType="com/aemcodea/dam/processwizard">
                 <form
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/coral/foundation/form"
