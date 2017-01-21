@@ -33,6 +33,7 @@ public class ProcessWizardFilter implements Filter {
 
     private static final String RESOURCE_TYPE = "com/aemcodea/dam/processwizard";
     private static final String JCR_METADATA = "jcr:content/metadata";
+    private static final String NS_DEF = "./jcr:content/metadata/aemcode:";
 
     final static Logger log = LoggerFactory.getLogger(ProcessWizardFilter.class);
 
@@ -45,6 +46,7 @@ public class ProcessWizardFilter implements Filter {
             throws IOException, ServletException {
         SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
         SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
+        log.info("Servlet Filter Called.");
         if (slingRequest.getResource().getResourceType().equals(RESOURCE_TYPE)) {
             try {
                 setMetadataAttributes(slingRequest);
@@ -79,7 +81,7 @@ public class ProcessWizardFilter implements Filter {
                 if(null != modifiableMetadataMap) {
                     while(parameterNames.hasMoreElements()) {
                         String nextParameter = (String) parameterNames.nextElement();
-                        if(nextParameter.startsWith("./jcr:content/metadata/kdc:") && !nextParameter.contains("TypeHint")) {
+                        if(nextParameter.startsWith(NS_DEF) && !nextParameter.contains("TypeHint")) {
                             String propertyName = StringUtils.substringAfter(nextParameter, "./jcr:content/metadata/");
                             if(null != request.getParameter(nextParameter)) {
                                 modifiableMetadataMap.put(propertyName, request.getParameter(nextParameter));

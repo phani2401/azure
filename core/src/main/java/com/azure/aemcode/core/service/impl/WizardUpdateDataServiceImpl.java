@@ -19,11 +19,11 @@ import com.day.cq.dam.api.Asset;
 @Component
 @Service
 public class WizardUpdateDataServiceImpl implements WizardUpdateDataService {
-    private static final String PROP_ESITES = "kdc:eSite";
-    private static final String PROP_RELATED_ASSETS = "kdag:relatedAssets";
-    private static final String PROP_RELATED_PRODUCTS = "kdc:relatedProducts";
-    private static final String PROP_TARGET_AUDIENCE = "kdc:targetAudience";
-    private static final String PROP_PARTNER_TYPE = "kdc:partnerType";
+    private static final String PROP_ESITES = "aemcode:eSite";
+    private static final String PROP_RELATED_ASSETS = "aemcode:relatedAssets";
+    private static final String PROP_RELATED_PRODUCTS = "aemcode:relatedProducts";
+    private static final String PROP_TARGET_AUDIENCE = "aemcode:targetAudience";
+    private static final String PROP_PARTNER_TYPE = "aemcode:partnerType";
     private static final String JCR_METADATA = "jcr:content/metadata";
     private static final String PROP_IS_PROCESSED_ASSET = "isProcessedAsset";
     
