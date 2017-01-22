@@ -47,6 +47,7 @@ public class AzureProcessWizardServlet extends SlingAllMethodsServlet {
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
+		log.info("Started the servlet.");
 		HtmlResponse htmlResponse = null;
 		try {
 			ResourceResolver resourceResolver = request.getResourceResolver();
