@@ -1,8 +1,6 @@
 #Build
-*/target/**
-target/
-.classpath
-.lazybones
+/bin/
+/target/
 
 #IDE specific
 .metadata
