@@ -2,13 +2,38 @@
 	data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
 	data-sly-call="${clientlib.all @ categories='search.results'}" />
 
-<div id="search">
-	Enter Search Term : <input type="text" id="search-field" value="search"
-		name="search-field" /> <br />
-	<button name="Submit" id="submit" onClick="getResults()">Submit</button>
-</div>
-<br />
-<br />
+<div id="noresults"></div>
+<div class="row-fluid ">
+	<div class="span6">
+		<h3 id="displayResults">Please conduct your search using the
+			fields below.</h3>
 
-<div id="facets"></div>
-<div id="results"></div>
+        <!-- Hidden Fields -->
+        <input type="hidden" id="offset" value=""/>
+<!-- search fields starts --> 
+		<div id="search">
+			Enter Search Term : <input type="text" id="search-field"
+				value="search" name="search-field" /> <br />
+			<button name="Submit" id="submit" onClick="getResults()">Submit</button>
+		</div>
+		<br /> <br />
+
+		<div id="facets"></div>
+		<div id="results"></div>
+		
+<!-- search fields Ends --> 
+
+		<form action="?" method="post" name="search_results2">
+			<div class="search-resultsPerPage">
+				<span>Display:</span> <select id="resultsPerPage"
+					name="resultsPerPage" onchange="searchRecordsPerPage();">
+					<option value="12" selected="">12</option>
+					<option value="24">24</option>
+					<option value="48">48</option>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div class="span6 search-paging reslib-paging"
+		id="paginationsearchresults"></div>
+</div>

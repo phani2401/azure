@@ -19,6 +19,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
+import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.commons.osgi.PropertiesUtil;
@@ -46,11 +47,17 @@ public class SearchServlet extends SlingAllMethodsServlet {
 	// final
 	@Property(label = "Add Search Paths", description = "The Search will be done on the given paths only. Leaving it empty will return eempty results.", unbounded = PropertyUnbounded.ARRAY)
 	private static final String PROPERTY_SEARCH_PATHS = "property.search.paths";
-	
+
 	@Reference
 	SearchService searchService;
 
 	private String[] searchPaths = null;
+	
+	@Override
+	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
 
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
@@ -61,10 +68,14 @@ public class SearchServlet extends SlingAllMethodsServlet {
 			}
 			SearchPOJO searchPOJO = new SearchPOJO();
 			searchPOJO.setSearchTerm(request.getParameter("search-field"));
+			if (null != request.getParameter("noofpages"))
+				searchPOJO.setNoOfPages(request.getParameter("noofpages"));
+			if (null != request.getParameter("offset"))
+				searchPOJO.setOffSet(request.getParameter("offset"));
 			if (null != searchPaths)
 				searchPOJO.setFilterPaths(Arrays.asList(searchPaths));
 			SearchResult searchResult = searchService.getSearchResult(searchPOJO, request.getResourceResolver());
-			response.getWriter().write(generateSearchResult(searchResult).toString());
+			response.getWriter().write(generateSearchResult(searchResult, searchPOJO).toString());
 		} catch (RepositoryException e) {
 			log.error("Exception while getting results: ", e);
 		} catch (JSONException e) {
@@ -75,19 +86,29 @@ public class SearchServlet extends SlingAllMethodsServlet {
 	/**
 	 * 
 	 * @param searchResult
+	 * @param searchPOJO
 	 * @return
 	 * @throws RepositoryException
 	 * @throws JSONException
 	 */
-	private JSONObject generateSearchResult(SearchResult searchResult) throws RepositoryException, JSONException {
-		JSONObject resultsJSON = new JSONObject();
+	private JSONArray generateSearchResult(SearchResult searchResult, SearchPOJO searchPOJO)
+			throws RepositoryException, JSONException {
+		JSONArray finalArray = new JSONArray();
 		Iterator<Resource> resources = searchResult.getResources();
 		while (resources.hasNext()) {
 			Resource nextResource = resources.next();
-			resultsJSON.put(nextResource.getName() + "*" + nextResource.getPath(), nextResource.getPath());
+			JSONObject obj = new JSONObject();
+			obj.put("title", nextResource.getName());
+			obj.put("path", nextResource.getPath());
+			finalArray.put(obj);
 		}
+		JSONObject resultsJSON = new JSONObject();
 		resultsJSON.put("facets", getFacetData(searchResult.getFacets()));
-		return resultsJSON;
+		if (searchPOJO.isHasMore()) {
+			resultsJSON.put("hasMore", searchPOJO.isHasMore());
+		}
+		finalArray.put(resultsJSON);
+		return finalArray;
 	}
 
 	/**

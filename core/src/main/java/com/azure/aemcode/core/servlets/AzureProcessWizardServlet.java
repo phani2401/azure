@@ -29,6 +29,7 @@ import com.azure.aemcode.core.service.WizardUpdateDataService;
 import com.day.cq.commons.servlets.HtmlStatusResponseHelper;
 import com.day.cq.dam.api.Asset;
 
+@SuppressWarnings("deprecation")
 @SlingServlet(resourceTypes = { "com/aemcodea/dam/processwizard" }, methods = { "POST" }, metatype = true)
 public class AzureProcessWizardServlet extends SlingAllMethodsServlet {
 
@@ -44,6 +45,7 @@ public class AzureProcessWizardServlet extends SlingAllMethodsServlet {
     private static final String uploadsFolderPattern = "/content/dam/aemcode(/.*/)uploads";
     private static final Pattern uploadPattern = Pattern.compile(uploadsFolderPattern);
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
